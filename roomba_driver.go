@@ -85,14 +85,14 @@ func NewRoombaDriver(a *RoombaAdaptor, name string) *RoombaDriver {
 
 		for i, weekday := range weekdays {
 			if t, ok := params[weekday].(string); ok {
-        day, err := time.Parse(layout, t)
-        if err != nil {
-          days[i] = day
-        }
+				day, err := time.Parse(layout, t)
+				if err == nil {
+					days[i] = day
+				}
 			}
 		}
 
-    r.Schedule(days)
+		r.Schedule(days)
 		return nil
 	})
 
@@ -232,16 +232,16 @@ func NewRoombaDriver(a *RoombaAdaptor, name string) *RoombaDriver {
 	})
 
 	r.AddCommand("QueryList", func(params map[string]interface{}) interface{} {
-    s := params["packetIds"].(string)
+		s := params["packetIds"].(string)
 		packetIdsStr := strings.Split(strings.Replace(s, " ", "", -1), ",")
 
 		packetIds := []uint8{}
 
 		for _, packetIdStr := range packetIdsStr {
 			packetId, err := strconv.Atoi(packetIdStr)
-      if err != nil {
-        packetIds = append(packetIds, uint8(packetId))
-      }
+			if err == nil {
+				packetIds = append(packetIds, uint8(packetId))
+			}
 		}
 
 		r.QueryList(packetIds)
@@ -249,16 +249,16 @@ func NewRoombaDriver(a *RoombaAdaptor, name string) *RoombaDriver {
 	})
 
 	r.AddCommand("Stream", func(params map[string]interface{}) interface{} {
-    s := params["packetIds"].(string)
+		s := params["packetIds"].(string)
 		packetIdsStr := strings.Split(strings.Replace(s, " ", "", -1), ",")
 
 		packetIds := []uint8{}
 
 		for _, packetIdStr := range packetIdsStr {
 			packetId, err := strconv.Atoi(packetIdStr)
-      if err != nil {
-        packetIds = append(packetIds, uint8(packetId))
-      }
+			if err == nil {
+				packetIds = append(packetIds, uint8(packetId))
+			}
 		}
 
 		r.Stream(packetIds)
@@ -288,7 +288,7 @@ func (r *RoombaDriver) Start() bool {
 }
 
 func (r *RoombaDriver) Halt() bool {
-  r.sender(COMMAND_SAFE, []uint8{})
+	r.sender(COMMAND_SAFE, []uint8{})
 	return true
 }
 
@@ -437,7 +437,7 @@ func (r *RoombaDriver) SchedulingLeds(weekday uint8, schedule bool, clock bool, 
 }
 
 func (r *RoombaDriver) DigitLedsRaw(digit [4]uint8) {
-  r.sender(COMMAND_DIGIT_LEDS_RAW, digit[:4])
+	r.sender(COMMAND_DIGIT_LEDS_RAW, digit[:4])
 }
 
 func (r *RoombaDriver) DigitLedsAscii(message string) {
