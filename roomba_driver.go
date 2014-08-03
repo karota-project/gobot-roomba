@@ -441,7 +441,7 @@ func (r *RoombaDriver) DigitLedsRaw(digit [4]uint8) {
 }
 
 func (r *RoombaDriver) DigitLedsAscii(message string) {
-	r.sender(COMMAND_DIGIT_LEDS_ASCII, []uint8(message[:4]))
+	r.sender(COMMAND_DIGIT_LEDS_ASCII, []uint8((message + "    ")[:4]))
 }
 
 func (r *RoombaDriver) Buttons(clock bool, schedule bool, day bool, hour bool, dock bool, spot bool, clean bool) {
