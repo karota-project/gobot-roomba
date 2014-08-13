@@ -46,6 +46,8 @@ func connect(r *RoombaAdaptor) {
 }
 
 func disconnect(r *RoombaAdaptor) {
-	r.sp.Close()
+	if r.sp != nil {
+		r.sp.Close()
+	}
 	r.SetConnected(false)
 }
