@@ -6,7 +6,7 @@ import (
 )
 
 func initTestRoombaDriver() *RoombaDriver {
-	return NewRoombaDriver(NewRoombaAdaptor("myAdaptor"), "myDriver")
+	return NewRoombaDriver(NewRoombaAdaptor("myAdaptor", "/dev/tty.usbserial"), "myDriver")
 }
 
 func TestRoombaDriverStart(t *testing.T) {

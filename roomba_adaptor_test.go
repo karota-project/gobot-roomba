@@ -6,7 +6,7 @@ import (
 )
 
 func initTestRoombaAdaptor() *RoombaAdaptor {
-	return NewRoombaAdaptor("myAdaptor")
+	return NewRoombaAdaptor("myAdaptor", "/dev/tty.usbserial")
 }
 
 func TestRoombaAdaptorConnect(t *testing.T) {
